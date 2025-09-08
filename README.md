@@ -6,7 +6,7 @@ This repository contains PyTorch implementation of YearCLIP in "YearGuessr: A Wo
 
 ![intro](figs/intro.png)
 
-[Project Page]()
+[Project Page](https://sytwu.github.io/YearGuessr/)
 |
 [HuggingFace](https://huggingface.co/datasets/Morris0401/Year-Guessr-Dataset)
 |
@@ -17,7 +17,7 @@ This repository contains PyTorch implementation of YearCLIP in "YearGuessr: A Wo
 ### Clone repository
 
 ```bash
-git clone --recursive https://github.com/Sytwu/Year-Guessr
+git clone --depth 1 https://github.com/Sytwu/Year-Guessr
 ```
 
 ### Dataset
