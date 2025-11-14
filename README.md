@@ -23,6 +23,7 @@ git clone --depth 1 https://github.com/Sytwu/Year-Guessr
 ### Quick Download
 
 ```bash
+cd Year-Guessr
 sh prepare.sh
 ```
 
