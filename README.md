@@ -12,33 +12,18 @@ This repository contains PyTorch implementation of YearCLIP in "YearGuessr: A Wo
 |
 [arXiv]()
 
-## Prerequisite  
-
-### Quick Download
-If you don't want to read through all the prerequisites, execute the following command:
-```
-git clone --depth 1 https://github.com/Sytwu/Year-Guessr
-
-# Install required packages
-pip install gdown
-
-# Data download and extraction
-gdown --id 1qJ-bjiEhjBWcx-ZHyiX3VpDiISLOYNH0 -O BUILDING.zip
-mkdir -p ./Year-Guessr/data/
-unzip BUILDING.zip -d ./Year-Guessr/data/
-rm BUILDING.zip
-
-# Base weights download and extraction
-gdown --id 1BYemJoiMtD1tz6Yym_1ToErLmwXGh7EY -O weights.tar.gz
-mkdir -p ./Year-Guessr/.cache/
-tar -xzf weights.tar.gz -C ./Year-Guessr/.cache/
-rm weights.tar.gz
-```
+## Prerequisite
 
 ### Clone repository
 
 ```bash
 git clone --depth 1 https://github.com/Sytwu/Year-Guessr
+```
+
+### Quick Download
+
+```bash
+sh prepare.sh
 ```
 
 ### Dataset
@@ -73,11 +58,12 @@ Download checkpoints and save them to `results/building/` accordingly.
 ## Installation
 
 ### Local Conda Environment
-By `.yml` file:
+Manually install:
 
 ```bash
-conda env create -f environment.yml
+conda create --name yearclip python=3.8
 conda activate yearclip
+pip install -r requirements.txt
 pip install git+https://github.com/openai/CLIP
 pip install -e .
 ```

@@ -342,6 +342,9 @@ class Runner(pl.LightningModule):
     def configure_optimizers(self):
         return self.build_optmizer_and_scheduler(**self._optimizer_and_scheduler_cfg)
 
+    def lr_scheduler_step(self, scheduler, metric):
+        scheduler.step()
+
     def build_optmizer_and_scheduler(
         self,
         param_dict_cfg=None,
