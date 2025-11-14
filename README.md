@@ -62,7 +62,8 @@ Download checkpoints and save them to `results/building/` accordingly.
 Manually install:
 
 ```bash
-conda create --name yearclip python=3.8
+pip install "pip<24.1"
+conda create --name yearclip python=3.8 -y
 conda activate yearclip
 pip install -r requirements.txt
 pip install git+https://github.com/openai/CLIP

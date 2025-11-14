@@ -16,11 +16,3 @@ rm weights.tar.gz
 gdown --id 163inf0A1zO0SdwHfCU6JHCyrXWQZA4LE -O weights.zip
 unzip weights.zip -d ./ordinalclip/models/
 rm weights.zip
-
-# Build conda environment
-pip install "pip<24.1"
-conda create --name yearclip python=3.8 -y
-conda activate yearclip
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP
-pip install -e .
