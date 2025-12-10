@@ -9,10 +9,11 @@ This repository contains PyTorch implementation of YearCLIP in "Beyond Memorizat
 
 [Project Page](https://sytwu.github.io/BeyondMemo/)
 |
-[arXiv]()
+[Paper]()
 |
 [Dataset](https://huggingface.co/datasets/Morris0401/Year-Guessr-Dataset)
-
+|
+[Statistics](https://docs.google.com/spreadsheets/d/1o_T1q3JrN1RZb0eFZMPdwurzhlDoot-qeKGvxWpzrr8/edit?usp=sharing)
 
 ## Prerequisite
 
