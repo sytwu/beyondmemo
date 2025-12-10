@@ -2,28 +2,30 @@
 
 Created by Li-Zhong Szu-Tu, Ting-Lin Wu, Chia-Jui Chang, He Syu, [Yu-Lun Liu](https://yulunalexliu.github.io/)
 
-This repository contains PyTorch implementation of YearCLIP in "YearGuessr: A Worldwide Building Age Benchmark with 55k Wikipedia Images and Ordinal Targets".
+This repository contains PyTorch implementation of YearCLIP in "Beyond Memorization: A Multi-Modal Ordinal Regression Benchmark to Expose Popularity Bias in Vision-Language Models".
 
 ![intro](figs/intro.png)
 
-[Project Page](https://sytwu.github.io/YearGuessr/)
-|
-[HuggingFace](https://huggingface.co/datasets/Morris0401/Year-Guessr-Dataset)
+
+[Project Page](https://sytwu.github.io/BeyondMemo/)
 |
 [arXiv]()
+|
+[Dataset](https://huggingface.co/datasets/Morris0401/Year-Guessr-Dataset)
+
 
 ## Prerequisite
 
 ### Clone repository
 
 ```bash
-git clone --depth 1 https://github.com/Sytwu/Year-Guessr
+git clone --depth 1 https://github.com/Sytwu/BeyondMemo
 ```
 
 ### Quick Download
 
 ```bash
-cd Year-Guessr
+cd BeyondMemo
 sh prepare.sh
 ```
 
