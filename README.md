@@ -9,7 +9,7 @@ This repository contains PyTorch implementation of YearCLIP in "Beyond Memorizat
 
 [Project Page](https://sytwu.github.io/BeyondMemo/)
 |
-[Paper]()
+[Paper](https://arxiv.org/abs/2512.21337)
 |
 [Dataset](https://huggingface.co/datasets/Morris0401/Year-Guessr-Dataset)
 |
@@ -119,5 +119,13 @@ Many thanks to the following repositories:
 If you find this codebase helpful, please consider to cite:
 
 ```
-TBD
+@misc{szutu2025memorizationmultimodalordinalregression,
+      title={Beyond Memorization: A Multi-Modal Ordinal Regression Benchmark to Expose Popularity Bias in Vision-Language Models}, 
+      author={Li-Zhong Szu-Tu and Ting-Lin Wu and Chia-Jui Chang and He Syu and Yu-Lun Liu},
+      year={2025},
+      eprint={2512.21337},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2512.21337}, 
+}
 ```
