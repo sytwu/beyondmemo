@@ -262,7 +262,7 @@ class RegCLIPSSR(nn.Module):
         logit_scale = self.logit_scale.exp()
         logits = logit_scale * image_features @ text_features.t()
         
-        if location:
+        if location is not None:
             location_features = self.location_encoder(location)
             location_features = self.zero_conv(location_features)
             image_features = image_features + location_features
@@ -271,9 +271,14 @@ class RegCLIPSSR(nn.Module):
         # print(f"Reason = {self.reasoning_features.shape}")
         reasoning_logits = logit_scale * image_features @ self.reasoning_features.t()
 
-        regress_age = self.regressor(logits, reasoning_logits, show_importance)
-
-        return logits, regress_age, image_features, text_features
+        regressor_output = self.regressor(logits, reasoning_logits, show_importance)
+        
+        if show_importance:
+            regress_age, saliency_logits, saliency_reason = regressor_output
+            return logits, regress_age, saliency_logits, saliency_reason
+        else:
+            regress_age = regressor_output
+            return logits, regress_age, image_features, text_features
 
     def forward_text_only(self):
         sentence_embeds = self.prompt_learner()
@@ -398,7 +403,11 @@ class SSRModule(nn.Module):
     def forward(self, logits, reasoning_logits, show_importance=False):
 
         prob_stage_1 = F.softmax(logits, dim=1)
-        # reasoning_logits = F.softmax(reasoning_logits, dim=1)
+        
+        # When computing importance, we need to enable gradients
+        if show_importance:
+            # Ensure reasoning_logits requires gradients
+            reasoning_logits = reasoning_logits.detach().requires_grad_(True)
         
         logits = torch.cat((logits, reasoning_logits), dim=1)
         
@@ -419,23 +428,22 @@ class SSRModule(nn.Module):
         regress_age = regress_age_a
         
         if show_importance:
-            # zero‐out any old grads
-            if logits.grad is not None: logits.grad.zero_()
-            if reasoning_logits.grad is not None: reasoning_logits.grad.zero_()
-
-            # backward to get ∂regress_age / ∂inputs
+            # backward to get ∂regress_age / ∂reasoning_logits
             # sum over batch so we get a scalar for autograd
             regress_age.sum().backward(retain_graph=True)
 
             # gradients are now in .grad
-            saliency_logits = logits.grad.abs()        # [batch, class_range]
-            saliency_reason = reasoning_logits.grad.abs()  # [batch, class_range]
+            saliency_logits = logits.grad
+            if saliency_logits is not None:
+                saliency_logits = saliency_logits.abs()
+            saliency_reason = reasoning_logits.grad.abs()  # [batch, ex_stage_num]
 
-            # you can normalize per‐sample if you like:
-            saliency_logits = saliency_logits / (saliency_logits.sum(dim=1, keepdim=True) + 1e-8)
+            # normalize per sample
+            if saliency_logits is not None:
+                saliency_logits = saliency_logits / (saliency_logits.sum(dim=1, keepdim=True) + 1e-8)
             saliency_reason = saliency_reason / (saliency_reason.sum(dim=1, keepdim=True) + 1e-8)
 
-            return regress_age, saliency_logits, saliency_reason
+            return regress_age.detach(), saliency_logits, saliency_reason
 
         return regress_age
     
