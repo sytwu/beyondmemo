@@ -93,6 +93,23 @@ Reproduce YearCLIP best (test):
 python scripts/run.py --config configs/building.yaml --output_dir results/building/YearCLIP_114514 --test_only
 ```
 
+## Local Demo
+
+Try out the interactive Gradio demo locally:
+
+```bash
+conda activate yearclip
+python gradio_demo_local.py
+```
+
+Then open http://localhost:7861 in your browser.
+
+**Features:**
+- Upload building images or select from example datasets (FI-London, MapYourCity, YearGuessr)
+- Optional GPS coordinates for improved accuracy
+- AI-powered explainability showing architectural features
+- Interactive card-based example gallery
+
 
 
 ## Experiments Structure
